@@ -1,0 +1,20 @@
+pip install requests
+import requests
+
+def get_random_cat_picture_url():
+    try:
+        response = requests.get("https://api.thecatapi.com/v1/images/search")
+        if response.status_code == 200:
+            data = response.json()
+            if data:
+                return data[0]['url']
+            else:
+                return "No cat picture URL found"
+        else:
+            return f"Failed to fetch cat picture URL. Status code: {response.status_code}"
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+# Example usage
+random_cat_url = get_random_cat_picture_url()
+print("Random Cat Picture URL:", random_cat_url)
